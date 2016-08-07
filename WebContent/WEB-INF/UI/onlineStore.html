@@ -11,9 +11,9 @@
 		   
 		</div>
 		<div class="grid seller">
-		    <div>
-		      <button id = "categoryButton"><h2>Category</h2></button>
-		      <button id = "productButton"><h2>Products</h2></button>
+		    <div class="category-product">
+		      <button id = "categoryButton" style="height:40px;"><h3>Category</h3></button>
+		      <button id = "productButton" style="height:40px;"><h3>Products</h3></button>
 			</div>
 		    <div id = "functiomOperation" class = "function-operation">
 				<div><a href="#" title="Add" value = "add"><h3> Add ++</h3></a></div>
@@ -50,6 +50,9 @@ body{
 	width: 90%;
 	margin-left:5%;
 }
+.navigation{
+    margin-left: 1%;
+}
 .current{
     display: block;
 }
@@ -74,6 +77,9 @@ body{
 }
 .function-operation div:hover{
    background-color: gray;
+}
+.category-product{
+   margin-left:40%;
 }
 table {
     font-family: arial, sans-serif;
@@ -148,7 +154,7 @@ window.onload = function(){
      var categoryFields = ["Category Id", "Category Name", "Category Description", "Field 1", "Field 2"];
 	 var productFields = ["Product Id", "Product Name", "Product Description", "Category Name", "Price"];
 	 var data = JSON.parse('[{"categoryId":1,"categoryName":"Stationery","categoryDesc":"","field1":null,"field2":null}, {"categoryId":2,"categoryName":"Toys","categoryDesc":null,"field1":null,"field2":null}, {"categoryId":3,"categoryName":"Footwear","categoryDesc":null,"field1":null,"field2":null}]');
-	 var baseUrl = "http://localhost:8080/Jivox_online/prod/ProductService/"
+	 var baseUrl = "http://192.168.6.46:8080/Jivox_online/prod/ProductService/"
 	 var loadData = function(container,relativeAddress){
 								var xhttp = new XMLHttpRequest();
 								xhttp.onreadystatechange = function() {
@@ -272,14 +278,14 @@ var traverseListFormat = function (data,container){
 	 document.getElementById('buyer').addEventListener('click',function(){
 	     document.querySelector('div.buyer').style.display = "block";
 		 document.querySelector('div.seller').style.display = "none";
-		 displayCategory();
+		 document.querySelector('div.buyer ul li') ? loadData(document.querySelector('div.buyer'),"getCategories"): displayCategory();
 	 });
 	 document.getElementById('seller').addEventListener('click',function(){
 	     console.log(this);
 	     document.querySelector('div.seller').style.display = "block";
 	     document.querySelector('div.buyer').style.display = "none";
-		 document.querySelector('#category').appendChild(createTableDesign(categoryFields,"getCategories"));
-	     document.querySelector('#product').appendChild(createTableDesign(productFields,"getProductsAll"));
+		 document.querySelector('#category table') ? loadData(document.querySelector('#category table'),"getCategories") : document.querySelector('#category').appendChild(createTableDesign(categoryFields,"getCategories"));
+         document.querySelector('#product table') ?  loadData(document.querySelector('#product table'),"getProductsAll") : document.querySelector('#product').appendChild(createTableDesign(productFields,"getProductsAll"));
 	 });
 	 document.querySelector('#categoryButton').addEventListener('click',function(){
 			document.querySelector('div.cateory-list').setAttribute('class','cateory-list current');
