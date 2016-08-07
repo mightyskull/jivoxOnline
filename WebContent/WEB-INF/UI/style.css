@@ -1,0 +1,192 @@
+body{
+background-image: url("back.jpg");
+background-size: cover; 
+/*set landing background more dark*/
+}
+
+
+#title{
+margin-left:540px;
+margin-right:570px;
+font-family:Impact, Charcoal, sans-serif;
+color:white;
+}
+
+.headclass{
+color:green;
+text-decoration: underline;
+font-weight: bold;
+}
+
+.headclass:hover {
+cursor : pointer;
+}
+
+#hiddenliststationary{
+position:absolute;
+left: 270px;
+top:240px;
+text-align:left;
+color:white;
+background-color: rgba(100,100,100,.2);
+}
+
+.sublistelement{
+margin-left:10px;
+margin-right:10px;
+}
+
+.sublist{
+	display:none;
+}
+
+	
+
+#searchbar{
+	width: 113px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('search.png');
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+	height: 50px;
+}
+#searchbar:focus {
+width : 273px;
+}
+
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgba(100,100,100,.2);
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color:rgba(0,100,0,.3);
+}
+
+.active {
+    background-color: green;
+}
+
+.landingbutton {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.landingclicks {
+	position: absolute;
+	top:200px;
+	right: 570px;
+}
+
+#landinglogo{
+	position: absolute;
+	top:250px;
+	right: 525px;
+	margin-left:100px;
+	width:350px;
+	height:200px;
+}
+
+.activeList{
+    display: block;
+}
+.inactiveDiv{
+	display: none;
+}
+.layout{
+}
+.function-operation{
+   display: block;
+   height: 40px;
+   margin-left:300px;
+}
+.function-operation div{
+   height: 100%;
+   display: inline-block;
+   margin-right: 10px;
+}
+.function-operation div  a{
+   text-decoration: none;
+   color: lightblue;
+
+}
+.function-operation div:hover{
+   background-color: rgba(0,0,89,.4);
+   
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+	border-spacing: 1px;
+}
+
+td, th {
+    text-align: center;
+	color : white;
+}
+
+tr:nth-child(even) {
+    background-color: rgba(0,100,0,.3);
+}
+
+.grid{
+width: 900px;
+margin-left:200px;
+min-height: 200px;
+background-color: rgba(0,0,60,.6);
+}
+
+#viewSelector{
+margin-left:420px;
+}
+
+.category-list current{
+display:block;
+}
+
+.product-list inactiveDiv{
+display: none;
+}
+
+#catview:hover{
+background-color:rgba(0,100,0,0.7);
+}
+
+#proview:hover{
+background-color:rgba(0,100,0,0.7);
+}
+legend{
+color:lightgreen;
+}
+.navigate{
+text-align:center;
+color:white;
+}
