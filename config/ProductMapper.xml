@@ -20,8 +20,8 @@
 	
 	<select id="getProducts_name" parameterType="String" resultType="Product">
 		select * from olstore.product
-		where itemName COLLATE Latin1_General_CI_AS LIKE #{key}
-		or itemDesc COLLATE Latin1_General_CI_AS LIKE #{key}
+		where itemName COLLATE Latin1_General_CI LIKE #{key}
+		or itemDesc COLLATE Latin1_General_CI LIKE #{key}
 		order by itemId
 	</select>
 	
