@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jivoxonline">
+
+	<select id="getCategories" resultType="Category">
+		select categoryId,catName as "categoryName"
+		from olstore.category
+	</select>
+	
+	<select id="getCategoriesFull" resultType="Category">
+		select categoryId,catName as "categoryName",categoryDesc,field1,field2
+		from olstore.category
+	</select>
+	
+	<select id="getProduct_itemId" parameterType="int" resultType="Product">
+		select * from olstore.product
+		where itemId = #{itemId}
+	</select>
+	
+	<select id="getProducts_name" parameterType="String" resultType="Product">
+		select * from olstore.product
+		where itemName COLLATE Latin1_General_CI_AS LIKE #{key}
+		or itemDesc COLLATE Latin1_General_CI_AS LIKE #{key}
+		order by itemId
+	</select>
+	
+	<select id="getProducts" parameterType="int" resultType="Product">
+		select * from olstore.product
+		where categoryId = #{category}
+		order by categoryId
+	</select>
+	
+	<select id="getProductsAll" resultType="Product">
+		select * from olstore.product
+		order by categoryId
+	</select>
+	
+	<select id="getProductNames" resultType="String">
+		select itemName
+		from olstore.product
+		order by itemName
+	</select>
+	
+	<select id="getProductDesc" resultType="String">
+		select itemDesc
+		from olstore.product
+		order by itemDesc
+	</select>
+
+	<insert id="insertProduct" parameterType="Product">
+		insert into olstore.product (itemId,itemName,itemDesc,itemPrice,categoryId,vendorId)
+		values (#{itemId}, #{itemName}, #{itemDesc}, #{itemPrice}, #{categoryId}, #{vendorId})
+	</insert>
+
+</mapper>

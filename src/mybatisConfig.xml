@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<properties resource="dbcp.properties"/>
+<settings>
+<setting name="useGeneratedKeys" value="true"/>
+</settings>
+<typeAliases>
+<typeAlias alias="Product" type="com.jivox.pojo.Product"/>
+<typeAlias alias="Category" type="com.jivox.pojo.Category"/>
+</typeAliases>
+<environments default="jivoxonline">
+<environment id="jivoxonline">
+<transactionManager type="JDBC"/>
+<dataSource type="POOLED">
+<property name="driver" value="${db.driver}"/>
+<property name="url" value="${db.url}"/>
+<property name="username" value="${db.user}"/>
+<property name="password" value="${db.pass}"/>
+</dataSource>
+</environment>
+</environments>
+<mappers>
+<mapper resource="ProductMapper.xml" />
+</mappers>
+</configuration>

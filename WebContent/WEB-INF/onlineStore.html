@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<title>Online Store</title>
+<body>
+   <div class = "layout">
+        <div class = "navigation">
+        </div>
+		<div class="grid">
+		    <div id = "functiomOperation" class = "function-operation">
+				<div><a href="#" title="Add" value = "add"><h3> Add ++</h3></a></div>
+				<div><a href="#" title="Delete" value = "delete"><h3> Delete --</h3></a></div>
+				<div><a href="#" title="Save" value = "query"><h3> Save **</h3></a></div>
+				<div><a href="#" title="Refresh Grid" value = "query"><h3> Refresh ===</h3></a></div>
+			</div>	
+			<div class = "cateory-list notactive">
+				<fieldset>
+					<legend>Category</legend>
+					<div id = "category">
+					</div>
+				</fieldset>
+			</div>
+			<div class = "product-list current">
+				<fieldset>
+					<legend>Products</legend>
+					<div id = "product">
+					</div>
+				</fieldset>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
+<style>
+html{
+	height:90%;
+	width:90%;
+}
+body{
+	height:90%;
+	width: 90%;
+	margin-left:5%;
+}
+.current{
+    display: block;
+}
+.notactive{
+	display: none;
+}
+.layout{
+    min-height: 80%;
+	background-color: aliceblue;
+}
+.function-operation{
+   display: block;
+   height: 40px;
+}
+.function-operation div{
+   height: 100%;
+   display: inline-block;
+   margin-right: 10px;
+}
+.function-operation div  a{
+   text-decoration: none;
+}
+.function-operation div:hover{
+   background-color: gray;
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+	border-spacing: 1px;
+}
+
+td, th {
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
+
+<script>
+Node.prototype.querySelectorAllArray = function(selector){
+  return Array.prototype.slice.call(this.querySelectorAll(selector));
+ }
+ Array.prototype.arrayEventListener = function(eventType, callback){
+     for(elem of this)
+	    elem.addEventListener(eventType, callback);
+ }
+ Array.prototype.filterArrayElement = function(tag){
+     var arr = new Array();
+	 this.forEach(function(i){
+	    if(i.tagName.toLowerCase() == tag)
+		   arr.push(i);
+	 });
+	 return arr;
+ }
+ Element.prototype.convertToArray = function(){
+     return Array.prototype.slice.call(this.children);
+ }
+ Object.prototype.ParentElement = function(selector){
+    var self = this.parentElement;
+	var isAvailable = false;
+    if(selector.indexOf('.') != -1 && self.getAttribute('class')){
+	classSelector = selector.replace('.','');
+	    self.getAttribute('class').split(' ').forEach(function(classSel){
+		   if(classSel == classSelector){
+		       isAvailable = true;
+			   return;
+			}
+		}); 
+	}
+	return isAvailable ? self : self.ParentElement(selector);
+ }
+ Object.prototype.ChildrenElement = function(selector,retElement){
+     var self = this;
+	 var listOfElements = this.convertToArray();
+	 if(selector.indexOf('.') > 1){
+	    self.arr = new Array();
+		for(var i=0; i < listOfElements.length > 0; i++){
+				if(listOfElements[i].tagName.toLowerCase() == selector.split('.')[0])
+					self.arr.push(listOfElements[i]);
+	    }
+	    var val = self.arr.forEach(function(x){
+		        if(x.getAttribute('class') && x.getAttribute('class').indexOf(selector.split('.')[1]) >= 0){
+				      self.retElement = x;
+				      return self.retElement;
+				}
+			    else if(x.children.length > 0)
+				       return x.ChildrenElement(selector);
+		});
+		if(self.retElement) return self.retElement;
+ }
+ }
+window.onload = function(){
+     var categoryFields = ["Category Id", "Category Name", "Category Description", "Field 1", "Field 2"];
+	 var productFields = ["Product Id", "Product Name", "Product Description", "Category Name", "Price"];
+	 var data = JSON.parse('[{"categoryId":1,"categoryName":"Stationery","categoryDesc":"","field1":null,"field2":null}, {"categoryId":2,"categoryName":"Toys","categoryDesc":null,"field1":null,"field2":null}, {"categoryId":3,"categoryName":"Footwear","categoryDesc":null,"field1":null,"field2":null}]');
+	 var baseUrl = "http://localhost:8080/Jivox_online/prod/ProductService/"
+	 var loadData = function(container){
+								var xhttp = new XMLHttpRequest();
+								xhttp.onreadystatechange = function() {
+								if (xhttp.readyState == 4 && xhttp.status == 200) {
+									//document.getElementById("demo").innerHTML = xhttp.responseText;
+									console.log(JSON.parse(xhttp.responseText));
+									traverseData(JSON.parse(xhttp.responseText),container);
+								}
+								};
+								xhttp.open("GET", baseUrl + "getCategories", true);
+								xhttp.send();
+}
+	 
+/*** parse the record ****/
+     var traverseData = function (data,container){
+       if(data && data.constructor !== Array)
+          {
+		      for (key in data) {
+					if (data.hasOwnProperty(key)) {
+					var child2 = document.createElement('td');
+					child2.innerHTML = data[key];
+					container.appendChild(child2);
+					console.log(key + " = " + data[key]);
+					}
+				}  
+              console.log(" is " + data);
+        }
+      if(data.constructor === Array){
+		  for(var i = 0; i < data.length; i++){
+		  var arrayElement = document.createElement('tr');
+	      var arrayObj = data[i];
+               traverseData(arrayObj,arrayElement);
+		  container.appendChild(arrayElement);
+          }
+		}
+	}
+/*** end of parsing ****/
+/***  creating list table     ***/
+     var createTableDesign = function(arr){
+	     var table= document.createElement('table');
+		 var tr = document.createElement('tr');
+		 arr.forEach( function(s) { 
+            var th = document.createElement('th');
+			th.innerHTML = s;
+			th.style.innerWidth = (100/arr.length) + '%';
+			tr.appendChild(th);
+         } );
+		 table.appendChild(tr);
+		 loadData(table);
+		 //traverseData(data,table);
+		 return table;
+	 }
+	 
+	 document.querySelector('#category').appendChild(createTableDesign(categoryFields));
+	 document.querySelector('#product').appendChild(createTableDesign(productFields));
+/*** end	**/
+
+
+/****  operation methods ***/
+     document.querySelectorAllArray('#functiomOperation a').arrayEventListener('click', function(){
+	     if(this.getAttribute('value') == 'add'){
+		     var self = this;
+		     var retElement;
+			 var parentElement = this.ParentElement('.grid');
+			 var element = parentElement.ChildrenElement('div.current',self.retElement);
+			 console.log(element);
+			 var itemFields = "product".indexOf(element.getAttribute('class')) != -1 ? categoryFields : productFields;
+			 var table = element.querySelector('table');
+			 var trCount = table.querySelectorAllArray('tr').length;
+			 var tr = document.createElement('tr');
+			 for(var i=0; i< itemFields.length; i++){
+				var td = document.createElement('td');
+				var input = document.createElement('input');
+				input.setAttribute('type','text');
+				input.setAttribute('id',itemFields[i].replace(' ','_') + '_' + trCount);
+				td.appendChild(input);
+				tr.appendChild(td);
+			 }
+			 table.appendChild(tr);
+			 }
+	 });
+/****  end *****/	 
+}
+
+</script>
