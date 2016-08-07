@@ -3,7 +3,6 @@ package com.jivox.services;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -11,6 +10,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.ibatis.exceptions.PersistenceException;
@@ -19,6 +19,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.jboss.netty.handler.codec.http.HttpResponse;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,6 +28,9 @@ import com.jivox.pojo.Product;
 
 @Path("/ProductService")
 public class ProductService {
+	
+	@Context
+	private HttpResponse resp;
 	
 	private static JivoxOnlineDAO dao;
 	private Logger log = LogManager.getLogger(ProductService.class);
