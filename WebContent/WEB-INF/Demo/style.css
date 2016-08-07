@@ -1,0 +1,54 @@
+html{
+	height:90%;
+	width:90%;
+}
+body{
+	height:90%;
+	width: 90%;
+	margin-left:5%;
+}
+.navigation{
+    margin-left: 1%;
+}
+.current{
+    display: block;
+}
+.notactive{
+	display: none;
+}
+.layout{
+    min-height: 80%;
+	background-color: aliceblue;
+}
+.function-operation{
+   display: block;
+   height: 40px;
+}
+.function-operation div{
+   height: 100%;
+   display: inline-block;
+   margin-right: 10px;
+}
+.function-operation div  a{
+   text-decoration: none;
+}
+.function-operation div:hover{
+   background-color: gray;
+}
+.category-product{
+   margin-left:40%;
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+	border-spacing: 1px;
+}
+
+td, th {
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}

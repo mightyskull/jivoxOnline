@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<title>Online Store</title>
+<link rel = "stylesheet" type="text/css" href="style.css">
+<body>
+   <div class = "layout">
+        <div class = "navigation">
+		   <button id = "buyer"><h2>Buyers</h2></button>
+		   <button id = "seller"><h2>Sellers</h2></button>
+        </div>
+		<div class = "buyer">
+		   
+		</div>
+		<div class="grid seller">
+		    <div class="category-product">
+		      <button id = "categoryButton" style="height:40px;"><h3>Category</h3></button>
+		      <button id = "productButton" style="height:40px;"><h3>Products</h3></button>
+			</div>
+		    <div id = "functiomOperation" class = "function-operation">
+				<div><a href="#" title="Add" value = "add"><h3> Add ++</h3></a></div>
+				<div><a href="#" title="Delete" value = "delete"><h3> Delete --</h3></a></div>
+				<div><a href="#" title="Save" value = "query"><h3> Save **</h3></a></div>
+				<div><a href="#" title="Refresh Grid" value = "query"><h3> Refresh ===</h3></a></div>
+			</div>	
+			<div class = "cateory-list notactive">
+				<fieldset>
+					<legend>Category</legend>
+					<div id = "category">
+					</div>
+				</fieldset>
+			</div>
+			<div class = "product-list current">
+				<fieldset>
+					<legend>Products</legend>
+					<div id = "product">
+					</div>
+				</fieldset>
+			</div>
+		</div>
+	</div>
+<script src="script.js"></script>
+</body>
+</html>
